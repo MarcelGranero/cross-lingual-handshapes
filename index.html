@@ -53,12 +53,6 @@
       cursor: default;
       pointer-events: none;
     }
-    .pipeline-pre {
-      font-size: 13px;
-      line-height: 1.5;
-      overflow-x: auto;
-      text-align: left;
-    }
   </style>
 </head>
 <body>
@@ -140,27 +134,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <pre class="pipeline-pre">
-ASL corpora                 model                    zero-shot transfer
-Sem-Lex ─┐            ┌─ MLP (single frame)─┐   phonological     LSC
-         ├─ training ─┼─ SL-GCN (skeleton) ─┼─▶ features ──▶ handshape
-PopSign ─┘            └─ SHuBERT (SSL)     ─┘   (5 streams)   decoding
-                                                    │  constrained to the
-                                                    ▼  37-class inventory
-                                          composite phonological distance
-      </pre>
-      <h2 class="subtitle has-text-centered">
-        Models trained on ASL predict five handshape-internal phonological
-        features; LSC handshapes are decoded from the predicted features
-        alone — no LSC labels are used at training time.
-      </h2>
     </div>
   </div>
 </section>
