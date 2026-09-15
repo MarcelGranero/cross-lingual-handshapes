@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zero-Shot Cross-Lingual Recognition of Sign Language Handshapes</title>
+<style>
+  :root {
+    --ink: #1a1f24; --muted: #5c6670; --accent: #7a3e8f; --accent-ink: #5e2f70;
+    --bg: #fbfaf8; --card: #ffffff; --line: #e4e0da;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e8e6e3; --muted: #a0a6ad; --accent: #c890dc; --accent-ink: #d9b3e8;
+      --bg: #16181c; --card: #1f2228; --line: #33373e;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 17px/1.65 Georgia, "Times New Roman", serif;
+  }
+  main { max-width: 46rem; margin: 0 auto; padding: 3.5rem 1.25rem 4rem; }
+  h1 {
+    font-size: 1.9rem; line-height: 1.25; margin: 0 0 .75rem;
+    letter-spacing: -.01em;
+  }
+  .authors, .venue { color: var(--muted); margin: .2rem 0; }
+  .authors a { color: inherit; }
+  .venue em { color: var(--accent-ink); font-style: normal; font-weight: bold; }
+  nav { margin: 1.6rem 0 2.2rem; display: flex; flex-wrap: wrap; gap: .6rem; }
+  nav a {
+    display: inline-block; padding: .45rem 1.05rem; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--card);
+    color: var(--ink); text-decoration: none;
+    font-family: system-ui, sans-serif; font-size: .92rem;
+  }
+  nav a:hover { border-color: var(--accent); color: var(--accent-ink); }
+  nav .soon {
+    display: inline-block; padding: .45rem 1.05rem; border-radius: 999px;
+    border: 1px dashed var(--line); background: transparent;
+    color: var(--muted); cursor: default;
+    font-family: system-ui, sans-serif; font-size: .92rem;
+  }
+  h2 {
+    font-size: 1.15rem; margin: 2.4rem 0 .6rem;
+    font-family: system-ui, sans-serif; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--accent-ink);
+  }
+  figure.pipeline {
+    margin: 2rem 0; padding: 1.1rem; background: var(--card);
+    border: 1px solid var(--line); border-radius: 10px; overflow-x: auto;
+  }
+  figure.pipeline pre {
+    margin: 0; font: 13px/1.5 ui-monospace, Menlo, Consolas, monospace;
+    color: var(--muted);
+  }
+  figure.pipeline figcaption {
+    font-family: system-ui, sans-serif; font-size: .85rem;
+    color: var(--muted); margin-top: .7rem;
+  }
+  .highlight { color: var(--accent-ink); }
+  pre.bibtex {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 1rem 1.2rem; overflow-x: auto;
+    font: 13px/1.5 ui-monospace, Menlo, Consolas, monospace;
+  }
+  .note {
+    font-family: system-ui, sans-serif; font-size: .88rem; color: var(--muted);
+    border-left: 3px solid var(--accent); padding-left: .9rem; margin: 1.4rem 0;
+  }
+  footer {
+    margin-top: 3.5rem; padding-top: 1.2rem; border-top: 1px solid var(--line);
+    color: var(--muted); font-family: system-ui, sans-serif; font-size: .85rem;
+  }
+  a { color: var(--accent-ink); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Zero-Shot Cross-Lingual Recognition of Sign&nbsp;Language Handshapes</h1>
+  <p class="authors">Marcel Granero Moya, Carolina del Corral Farrarós,
+    Gloria Haro, Coloma Ballester, Ricardo Marques</p>
+  <p class="venue"><em>WSLP @ EMNLP 2026</em> — 2nd Workshop on Sign
+    Language Processing · Universitat Pompeu Fabra</p>
+
+  <nav>
+    <span class="soon" aria-disabled="true">📄 Paper (soon)</span>
+    <span class="soon" aria-disabled="true">📑 arXiv (soon)</span>
+    <a href="https://github.com/MarcelGranero/asl2lsc-phonology">💻 Code</a>
+    <span class="soon" aria-disabled="true">🧠 Models (soon)</span>
+    <span class="soon" aria-disabled="true">📦 Features (soon)</span>
+    <a href="#bibtex">🔖 BibTeX</a>
+  </nav>
+
+  <h2>Abstract</h2>
+  <p>Sign language processing advances rapidly for high-resource languages
+  such as American Sign Language (ASL), yet most of the world's sign
+  languages lack the phonological annotations new methods require. We
+  present the first zero-shot cross-lingual framework for handshape
+  recognition, transferring from ASL to Catalan Sign Language (LSC). Our
+  approach leverages the decomposition of handshapes into five phonological
+  features — selected fingers, flexion, spread, thumb position, and thumb
+  contact — shared across both languages, to decode LSC handshapes from
+  predicted features via a composite phonological distance metric. We
+  evaluate three architectures (MLP, SL-GCN, SHuBERT) trained on two ASL
+  corpora (PopSign, Sem-Lex) against a 37-handshape LSC benchmark.
+  Zero-shot transfer proves highly viable once recording-format disparities
+  are harmonized, reaching <span class="highlight">80.0% phonological
+  feature accuracy</span> and <span class="highlight">54.5% expected
+  handshape accuracy</span>. Phonological decomposition thus offers an
+  annotation-free bridge for extending sign language technologies to
+  low-resource languages.</p>
+
+  <h2>Approach</h2>
+  <figure class="pipeline">
+<pre>
+ASL corpora                 model                    zero-shot transfer
+Sem-Lex ─┐            ┌─ MLP (single frame)─┐   phonological     LSC
+         ├─ training ─┼─ SL-GCN (skeleton) ─┼─▶ features ──▶ handshape
+PopSign ─┘            └─ SHuBERT (SSL)     ─┘   (5 streams)   decoding
+                                                    │  constrained to the
+                                                    ▼  37-class inventory
+                                          composite phonological distance
+</pre>
+    <figcaption>Models trained on ASL predict five handshape-internal
+    phonological features; LSC handshapes are decoded from the predicted
+    features alone — no LSC labels are used at training time.</figcaption>
+  </figure>
+
+  <h2>What is released</h2>
+  <ul>
+    <li><strong>Code</strong> (MIT): the full training and evaluation
+      pipelines for all three model families, plus the table generators —
+      every number in the paper regenerates from the committed metrics, and
+      CI certifies the regeneration is byte-identical.</li>
+    <li><strong>Models</strong>: trained checkpoints for every main
+      configuration (SHuBERT, SL-GCN, MLP × Sem-Lex, PopSign), with SHA-256
+      manifest. Sem-Lex-trained weights: CC BY-NC-SA 4.0.</li>
+    <li><strong>Features</strong>: pre-processed PopSign feature packs
+      (CC BY 4.0) for training reproduction without the GPU preprocessing
+      pipeline.</li>
+    <li><strong>LSC evaluation</strong>: the complete scoring pipeline and
+      per-arm aggregate metrics. The LSC benchmark itself (videos and gold
+      labels) is forthcoming as its own release.</li>
+  </ul>
+
+  <p class="note">The released models predict phonological feature classes
+  of isolated signs. They are research artifacts, not signer-identification
+  systems, and must not be used to identify individuals.</p>
+
+  <h2 id="bibtex">Citation</h2>
+  <pre class="bibtex">@inproceedings{granero-moya-etal-2026-zero-shot,
+  title     = {Zero-Shot Cross-Lingual Recognition of Sign Language Handshapes},
+  author    = {Granero Moya, Marcel and del Corral Farrar{\'o}s, Carolina
+               and Haro, Gloria and Ballester, Coloma and Marques, Ricardo},
+  booktitle = {Proceedings of the Second Workshop on Sign Language Processing (WSLP)},
+  year      = {2026},
+  publisher = {Association for Computational Linguistics}
+}</pre>
+
+  <footer>
+    Contact: Marcel Granero Moya · marcel.granero@upf.edu ·
+    Universitat Pompeu Fabra. Computed on EuroHPC JU systems.
+  </footer>
+</main>
+</body>
+</html>
