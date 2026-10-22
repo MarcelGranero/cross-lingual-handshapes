@@ -51,6 +51,19 @@
     .author-block {
       display: inline-block;
     }
+    .paper-figure {
+      margin: 1.5rem auto 0;
+    }
+    .paper-figure img {
+      display: block;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .paper-figure figcaption {
+      margin-top: 0.75rem;
+      color: #555;
+      font-size: 0.9rem;
+    }
     .publication-links .button[disabled] {
       opacity: .5;
       cursor: default;
@@ -103,6 +116,17 @@
                       <i class="ai ai-arxiv"></i>
                   </span>
                   <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Poster Link (WSLP 2026, A0 portrait; PDF downloaded from
+                   Overleaf 2026-10-22). -->
+              <span class="link-block">
+                <a href="poster.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-image"></i>
+                  </span>
+                  <span>Poster</span>
                 </a>
               </span>
               <!-- Code Link. -->
@@ -181,6 +205,99 @@
       </div>
     </div>
     <!--/ Abstract. -->
+  </div>
+</section>
+
+<!-- Method and Results figures are cut from the printed poster by
+     docs/tools/release/make_page_figures.py (never edit the PNGs by hand). -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Method. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+            Handshapes can be decomposed into five phonological features
+            shared across languages: selected fingers, finger flexion,
+            spread, thumb position and thumb contact. Three architectures
+            (MLP, SL-GCN, SHuBERT) learn to predict these features from
+            American Sign Language (ASL) videos only. An LSC video is first
+            cropped and subsampled to the recording format of the training
+            corpus; the LSC handshapes whose phonological features have the
+            fewest mismatches with the prediction are then selected, so no
+            LSC video or label is needed in training.
+          </p>
+        </div>
+        <figure class="paper-figure" style="max-width: 680px;">
+          <a href="static/pipeline.png">
+            <img src="static/pipeline.png" loading="lazy"
+                 alt="Zero-shot pipeline: an LSC signed video is harmonized to the training corpus' recording format, ASL-trained models (MLP, SL-GCN, SHuBERT) predict five phonological features, and the LSC handshapes with the fewest mismatching features are selected from the 37-handshape LSC inventory.">
+          </a>
+          <figcaption>
+            Zero-shot pipeline: the dashed boxes are the only
+            language-specific inputs. In this example the predicted
+            features mismatch the true handshape (3-extended) in one
+            feature, and two other LSC handshapes are equally close, so the
+            three tied candidates score an expected accuracy of 33.3%.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+    <!--/ Method. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Results. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results</h2>
+        <figure class="paper-figure">
+          <a href="static/results.png">
+            <img src="static/results.png" loading="lazy"
+                 alt="Bar charts of phonological features accuracy and handshape accuracy for MLP, SL-GCN and SHuBERT trained on PopSign or Sem-Lex: in-domain ASL test, zero-shot LSC with the raw recording format, and zero-shot LSC with the harmonized recording format.">
+          </a>
+          <figcaption>
+            In-domain ASL vs. zero-shot LSC accuracy, raw and with harmonized
+            recording format; mean of 3 seeds.
+          </figcaption>
+        </figure>
+        <div class="content has-text-left" style="margin-top: 1.25rem;">
+          <ul>
+            <li><strong>Zero-shot transfer works</strong>, with a large drop from ASL.</li>
+            <li>The <strong>MLP is the weakest model in-domain</strong> yet the strongest zero-shot.</li>
+            <li><strong>Harmonization</strong> lifts the Sem-Lex MLP by +17.4 / +27.2
+              points, to <strong>80.0%</strong> phonological features and
+              <strong>54.5%</strong> handshape accuracy.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--/ Results. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Poster. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Poster</h2>
+        <figure class="paper-figure" style="max-width: 420px;">
+          <a href="poster.pdf">
+            <img src="static/poster_thumb.jpg" loading="lazy"
+                 alt="The WSLP 2026 poster (A0 portrait).">
+          </a>
+          <figcaption>
+            Presented at WSLP @ EMNLP 2026, Budapest.
+            <a href="poster.pdf">Download the poster (PDF, A0)</a>.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+    <!--/ Poster. -->
   </div>
 </section>
 

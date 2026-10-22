@@ -7,6 +7,8 @@ Handshapes** (2nd Workshop on Sign Language Processing, WSLP @ EMNLP 2026).
 - Code: https://github.com/MarcelGranero/asl2lsc-phonology
 
 The page is a single `index.html` served by GitHub Pages — no build step.
+It links `paper.pdf` and `poster.pdf`; the figures in `static/` are cut
+from the printed poster.
 Styling follows the [Nerfies](https://github.com/nerfies/nerfies.github.io)
 template (Bulma + Font Awesome + Academicons, loaded from CDNs).
 
